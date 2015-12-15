@@ -52,7 +52,12 @@
 	// Driver for Expressif ESP8266 WiFi
 	#if (WIFI_ESP8266)
 		#include "drivers/mcu_esp8266/ethESP8266/vNetDriver_eth.cpp"	
-	#endif		
+	#endif
+
+	
+	#if (ETH_RASPI)
+		#include "drivers/raspi/ethRaspi/vNetDriver_eth.cpp"	
+	#endif	
 	
 #endif
 	
@@ -67,7 +72,11 @@
 	
 	#if(HOPERF_RFM69)
 		#include "drivers/mcu_avr/RFM69/vNetDriver_rfm69.cpp"
-	#endif		
+	#endif	
+
+	#if(NRF24RPI)
+		#include "drivers/raspi/nrfRaspi/vNetDriver_nrf24raspi.cpp"
+	#endif	
 #endif
 	
 #if (VNET_MEDIA3_ENABLE)

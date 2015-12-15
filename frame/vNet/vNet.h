@@ -68,6 +68,10 @@
 	#if(HOPERF_RFM69)
 		#include "drivers/mcu_avr/RFM69/vNetDriver_rfm69.h"
 	#endif	
+
+	#if(NRF24RPI)
+		#include "drivers/raspi/nrfRaspi/vNetDriver_nrf24raspi.h"
+	#endif	
 #endif
 	
 #if (VNET_MEDIA3_ENABLE)
