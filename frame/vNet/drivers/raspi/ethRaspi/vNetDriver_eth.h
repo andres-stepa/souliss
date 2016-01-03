@@ -32,6 +32,16 @@
 
 #include "frame/vNet/tools/UserMode.h"
 
+typedef struct
+{
+	U8 base_ip[4];			// Base IP address for address translation
+	U8 ip[4];				// IP address
+	U8 subnetmask[4];		// Subnetmask
+	U8 gateway[4];			// Gateway address
+} TCPIP;
+
+TCPIP stack;
+
 void eth_GetIP(uint8_t *ip_addr);
 void eth_SetBaseIP(uint8_t *ip_addr);
 void eth_SetSubnetMask(uint8_t *submask);
@@ -42,6 +52,10 @@ uint8_t vNet_DataAvailable_M1();
 uint8_t vNet_RetrieveData_M1(uint8_t *data);
 uint16_t vNet_GetSourceAddress_M1();
 void vNet_SetAddress_M1(uint16_t addr);
+void eth_vNettoIP(const uint16_t addr, uint8_t *ip_addr);
+void eth_SetIPAddress(uint8_t *ip_addr);
+void eth_IPtovNet(uint16_t *addr, const uint8_t *ip_addr);
+
 
 
 #endif

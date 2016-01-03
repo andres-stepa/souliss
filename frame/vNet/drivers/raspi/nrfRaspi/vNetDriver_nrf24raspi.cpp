@@ -42,6 +42,8 @@ void vNet_Init_M2()
 {
 	radio.begin();
 	radio.enableDynamicPayloads();
+        radio.setChannel(NRF24_CHANNEL);
+        //radio.setDataRate(RF24_250KBPS);
 }
 
 /**************************************************************************/
@@ -107,8 +109,10 @@ uint8_t vNet_Send_M2(uint16_t addr, oFrame *frame, uint8_t len)
     radio.stopListening();
 
     // Send out the oFrame, doesn't need to specify the length
+    radio.printDetails();
     if(radio.write(tempBuf, data_len))
     {
+        radio.printDetails();
             // Listening back
         radio.startListening();
 
