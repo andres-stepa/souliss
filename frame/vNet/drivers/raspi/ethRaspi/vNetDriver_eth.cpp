@@ -38,11 +38,6 @@
 #include <netdb.h> //hostent
 #include <fcntl.h>
 
-
-#if (VNET_DEBUG)
-	#define VNET_LOG Serial.print
-#endif
-
 int sockfd = -1;
 U8 vNetM1_header;										// Header for output frame
 oFrame vNetM1_oFrame;									// Data structure for output frame

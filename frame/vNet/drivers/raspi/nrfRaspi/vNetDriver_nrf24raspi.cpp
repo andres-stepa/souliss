@@ -84,8 +84,9 @@ uint8_t vNet_Send_M2(uint16_t addr, oFrame *frame, uint8_t len)
     if(flen > NRF24_MAX_PAYLOAD) flen = NRF24_MAX_PAYLOAD;
 
     uint8_t data_len = min(flen,radio.getPayloadSize());
+    uint8_t buf_len = max(data_len,radio.getPayloadSize());
 
-    U8 tempBuf[data_len];
+    U8 tempBuf[buf_len];
     int i=0;
     while ( i < data_len)
     {
@@ -95,11 +96,12 @@ uint8_t vNet_Send_M2(uint16_t addr, oFrame *frame, uint8_t len)
             return 0;
         i++;
     }
-    /*while (i<radio.getPayloadSize())
+    
+    while (i<buf_len)
     {
         tempBuf[i]=0; 
         i++;
-    }    */    
+    }        
     oFrame_Reset();    
     
     // Set the pipe address of the destination node
@@ -108,11 +110,10 @@ uint8_t vNet_Send_M2(uint16_t addr, oFrame *frame, uint8_t len)
     // Before write, stop listening pipe
     radio.stopListening();
 
-    // Send out the oFrame, doesn't need to specify the length
-    radio.printDetails();
-    if(radio.write(tempBuf, data_len))
+    //radio.printDetails();
+    if(radio.write(tempBuf, buf_len))
     {
-        radio.printDetails();
+        //radio.printDetails();
             // Listening back
         radio.startListening();
 
